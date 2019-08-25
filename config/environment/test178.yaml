@@ -1,0 +1,4 @@
+platform:
+  role:
+    tester01: ['18917965476','952754']
+  host: http://platform.test.shun178.com

@@ -1,0 +1,4 @@
+platform:
+  username: [name,phone]
+  verification: [name,smsCd]
+  login: [xpath,"//div[3]/div/button/span"]

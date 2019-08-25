@@ -1,0 +1,15 @@
+platform:
+  self: platform
+  version: &v '#'
+  login:
+    self: login
+  dashboard:
+    self: dashboard
+  fiance:
+    self: fiance
+    transaction:
+      self: transaction
+
+
+
+
