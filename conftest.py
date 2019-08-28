@@ -7,6 +7,7 @@ def browser():
     global driver
     if driver==None or driver=="chrome":
         driver=webdriver.Chrome()
+        driver.implicitly_wait(10)
     return driver
 # @pytest.fixture(scope='session',autouse=True)
 # def close_browser():

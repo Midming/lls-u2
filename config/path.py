@@ -12,6 +12,5 @@ env_file=env+r'.yaml'
 current_env_path=os.path.join(env_dir,env_file)
 
 location_dir=os.path.join(dir_path,'location')
-login_path=os.path.join(location_dir,'login')
 
 url_path=os.path.join(dir_path,'url.yaml')

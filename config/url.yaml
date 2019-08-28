@@ -10,6 +10,15 @@ platform:
     transaction:
       self: transaction
 
+angency:
+  self: agency
+  version: '#'
+  login:
+    self: login
+  dashboard:
+    self: dashboard
+
+
 
 
 

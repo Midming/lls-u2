@@ -1,14 +1,12 @@
 from utility.read_config import Read_config
-from utility.basePage import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as ES
 
 
 class PlatformLogin:
     def __init__(self,browser):
         self.driver=browser
-        self.platform=Read_config().location_login()['platform']
+        self.platform=Read_config().read_location_platform_login()
 
     def username_by(self):
         by=self.platform['username']
@@ -38,6 +36,8 @@ class PlatformLogin:
         by=['xpath', "//div[@id='app']/div/div/div/div[3]/span/button/span"]
         ele=WebDriverWait(self.driver,30).until(ES.visibility_of_element_located(by))
         return ele
+
+
 
 
 
