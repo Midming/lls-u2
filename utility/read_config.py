@@ -1,10 +1,17 @@
 import yaml,os
+import xlwt
 from utility.basePage import BasePage
 from urllib.parse import urljoin
-from utility.utilities import url_join,read_interface
-from config.path import current_env_path,url_path,read_yaml,location_dir
+from utility.utilities import url_join,read_interface,save_xlsx,time_stamp
+from config.path import current_env_path,url_path,read_yaml,location_dir,dir_path
 path_location_agency=os.path.join(location_dir,'agency')
 path_location_platform=os.path.join(location_dir,'platform')
+path_location_company=os.path.join(location_dir,'company')
+
+path_project=os.path.dirname(dir_path)
+path_test_data=os.path.join(path_project,'test_data')
+path_test_file=os.path.join(path_test_data,'test_file')
+
 
 # current_path=os.path.realpath(__file__)
 # father_path=os.path.dirname(current_path)
@@ -33,10 +40,42 @@ class Read_config:
         self.env = self.read_current_env()
         self.platform = self.env['platform']
         self.angency=self.env['angency']
+        self.company = self.env['company']
         self.urls=read_yaml(url_path)
+        self.test_data=self.read_test_data()
 
     # def location_login(self,path=login_path):
     #     return read_yaml(path)
+    @staticmethod
+    def read_test_data():
+        path=os.path.join(path_test_data,'temp.yaml')
+        print(path)
+        content=read_yaml(path)
+        return content
+    def get_bill_part_time(self):
+        content=self.test_data['part-time-bill']
+        wb=xlwt.Workbook()
+        sheet=wb.add_sheet('工作表1',cell_overwrite_ok=True)
+
+        prefix=content.pop('prefix')
+        keys = content.keys()
+        keys = list(keys)
+        people_num=len(content['姓名'])
+        key_num=len(keys)
+        for i in range(0,key_num):
+            sheet.write(0,i,keys[i])
+        for i in range(1,people_num+1):
+            for j in range(0,key_num):
+                sheet.write(i+1,content[keys[j]][i+1])
+        t=time_stamp()
+        save_xlsx(wb,prefix,t,dir=path_test_file)
+
+
+
+
+
+    def get_bill_full_time(self):
+        pass
 
     def read_location_platform_login(self):
         self.path = os.path.join(path_location_platform, 'login.yaml')
@@ -44,10 +83,26 @@ class Read_config:
         return content
 
 
+    def read_location_company_login(self):
+        self.path=os.path.join(path_location_company,'login.yaml')
+        content = read_yaml(self.path)
+        return content
+
+    def read_location_company_dashboard(self):
+        self.path=os.path.join(path_location_company,'dashboard.yaml')
+        content=read_yaml(self.path)
+        return content
+
+    def read_location_company_billImport(self):
+        self.path=os.path.join(path_location_company,'bill-import.yaml')
+        content = read_yaml(self.path)
+        return content
+
     def read_location_agency_dashboard(self):
         self.path=os.path.join(path_location_agency,'dashboard.yaml')
         content=read_yaml(self.path)
         return content
+
     def read_location_agency_login(self):
         self.path = os.path.join(path_location_agency, 'login.yaml')
         content = read_yaml(self.path)
@@ -76,14 +131,24 @@ class Read_config:
         interface_url = read_interface(dict_url, interface)
         url = url_join(self.angency['host'], interface_url)
         return url
+    def company_url(self,interface):
+        dict_url=self.urls['company']
+        interface_url = read_interface(dict_url, interface)
+        url = url_join(self.company['host'], interface_url)
+        return url
+
     def angency_role(self,role):
         roles=self.angency['role']
         r=roles[role]
         return r
+    def company_role(self,role):
+        roles=self.company['role']
+        r=roles[role]
+        return r
 
-# r=Read_config()
-# c=r.read_location_agency_dashboard()
-# print(c)
+r=Read_config()
+
+c=r.get_bill_part_time()
 
 
 

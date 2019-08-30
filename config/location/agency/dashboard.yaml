@@ -2,3 +2,5 @@ window:
   self: ['xpath',"(.//*[normalize-space(text()) and normalize-space(.)='确 认'])[1]/following::span[2]"]
   confirm: ['xpath','//button[2]/span']
   cabcel: []
+
+

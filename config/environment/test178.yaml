@@ -7,3 +7,9 @@ angency:
   role:
     tester01: ['15900545910','952754']
   host: http://agency.test.shun178.com
+
+company:
+  role:
+#    北京聚丰
+    tester01: ['13910396528','952754']
+  host: http://company.test.shun178.com

@@ -18,6 +18,14 @@ angency:
   dashboard:
     self: dashboard
 
+company:
+  self: company
+  version: '#'
+  login:
+    self: login
+  dashboard:
+    self: dashboard
+
 
 
 

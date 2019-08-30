@@ -1,4 +1,4 @@
-import time
+import time,os
 from selenium.common.exceptions import NoSuchElementException
 def url_join(*args):
     seq='/'
@@ -44,3 +44,26 @@ def is_ele_exist(driver,by):
     except NoSuchElementException:
         ele=False
     return ele
+def time_stamp():
+    t=time.localtime(time.time())
+    s=time.strftime("%Y%m%d%H%M%S",t)
+    return s
+
+def save_xlsx(wb,*args,dir=None):
+    extension=r'.xls'
+    filename=''
+    for i in range(len(args)):
+        filename=filename+args[i]
+    if filename:
+        filename=filename+extension
+        if dir:
+            path=os.path.join(dir,filename)
+            wb.save(path)
+
+    else:
+        filename=None
+    return filename
+
+
+
+
