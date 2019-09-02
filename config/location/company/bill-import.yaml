@@ -1,0 +1,5 @@
+full-time: ['id',"tab-first"]
+part-time: ['id',"tab-second"]
+
+import-bill: ['xpath',"//div/button/span"]
+import-bill-input: ['xpath',"//div/input"]
