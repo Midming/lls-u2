@@ -28,7 +28,7 @@ class BasePage():
                 method=By.TAG_NAME
             elif method==CLASS_NAME or method==CLASS_NAME.upper():
                 method=By.CLASS_NAME
-            elif method=='css' or 'CSS' or CSS_SELECTOR or method==CSS_SELECTOR.upper():
+            elif method=='css' or method=='CSS' or method==CSS_SELECTOR or method==CSS_SELECTOR.upper():
                 method=By.CSS_SELECTOR
         return method
 

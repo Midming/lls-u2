@@ -127,6 +127,7 @@ class Test_company():
         print(url_dashboard, assert_url)
         assert url_dashboard == assert_url
     def get_part_time_bill(self):
+        pass
 
 
     def test_part_time_bill(self,browser):
@@ -137,15 +138,22 @@ class Test_company():
         sleep(1)
         dashboard.ele_bill_import().click()
         sleep(1)
+        dashboard.ele_settlement_record().click()
+        sleep(1)
         page_billImport=CompangyBillImport(browser)
         page_billImport.ele_part_time().click()
         sleep(1)
+
+        dashboard.ele_settlement_management().click()
+
+
+
         # page_billImport.ele_full_time().click()
         # sleep(1)
-        ele_import_bill=page_billImport.ele_import_bill()
-        filepath=rd.get_bill_part_time()
-        ele_import_bill_input=page_billImport.ele_import_bill_input()
-        ele_import_bill_input.send_keys(filepath)
+        # ele_import_bill=page_billImport.ele_import_bill()
+        # filepath=rd.get_bill_part_time()
+        # ele_import_bill_input=page_billImport.ele_import_bill_input()
+        # ele_import_bill_input.send_keys(filepath)
 
 
 
