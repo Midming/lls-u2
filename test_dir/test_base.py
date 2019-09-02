@@ -97,8 +97,8 @@ class Test_company():
 
     def test_login(self,browser):
         rd=self.readconifg()
-        role = self.rd.company_role('tester01')
-        url=self.rd.company_url('login')
+        role = rd.company_role('tester01')
+        url=rd.company_url('login')
         self.elements(browser).driver.get(url)
         username = role[0]
         verification = role[1]
@@ -126,8 +126,10 @@ class Test_company():
 
         print(url_dashboard, assert_url)
         assert url_dashboard == assert_url
+    def get_part_time_bill(self):
 
-    def test_full_time_bill(self,browser):
+
+    def test_part_time_bill(self,browser):
         rd = self.readconifg()
 
         dashboard=CompanyDashboard(browser)
@@ -138,12 +140,13 @@ class Test_company():
         page_billImport=CompangyBillImport(browser)
         page_billImport.ele_part_time().click()
         sleep(1)
-        page_billImport.ele_full_time().click()
-        sleep(1)
+        # page_billImport.ele_full_time().click()
+        # sleep(1)
         ele_import_bill=page_billImport.ele_import_bill()
-        filepath=
+        filepath=rd.get_bill_part_time()
         ele_import_bill_input=page_billImport.ele_import_bill_input()
         ele_import_bill_input.send_keys(filepath)
+
 
 
 

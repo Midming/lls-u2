@@ -2,7 +2,7 @@ import yaml,os
 import xlwt
 from utility.basePage import BasePage
 from urllib.parse import urljoin
-from utility.utilities import url_join,read_interface,save_xlsx,time_stamp
+from utility.utilities import url_join,read_interface,save_xls,time_stamp,write_xls
 from config.path import current_env_path,url_path,read_yaml,location_dir,dir_path
 path_location_agency=os.path.join(location_dir,'agency')
 path_location_platform=os.path.join(location_dir,'platform')
@@ -11,6 +11,7 @@ path_location_company=os.path.join(location_dir,'company')
 path_project=os.path.dirname(dir_path)
 path_test_data=os.path.join(path_project,'test_data')
 path_test_file=os.path.join(path_test_data,'test_file')
+path_test_file_temp= os.path.join(path_test_data, 'temp.yaml')
 
 
 # current_path=os.path.realpath(__file__)
@@ -48,9 +49,7 @@ class Read_config:
     #     return read_yaml(path)
     @staticmethod
     def read_test_data():
-        path=os.path.join(path_test_data,'temp.yaml')
-        print(path)
-        content=read_yaml(path)
+        content=read_yaml(path_test_file_temp)
         return content
     def get_bill_part_time(self):
         content=self.test_data['part-time-bill']
@@ -58,17 +57,21 @@ class Read_config:
         sheet=wb.add_sheet('工作表1',cell_overwrite_ok=True)
 
         prefix=content.pop('prefix')
-        keys = content.keys()
-        keys = list(keys)
-        people_num=len(content['姓名'])
-        key_num=len(keys)
-        for i in range(0,key_num):
-            sheet.write(0,i,keys[i])
-        for i in range(1,people_num+1):
-            for j in range(0,key_num):
-                sheet.write(i+1,content[keys[j]][i+1])
+        write_xls(sheet,content)
+
+        # keys = content.keys()
+        # keys = list(keys)
+        # people_num=len(content['姓名'])
+        # key_num=len(keys)
+        # for i in range(0,key_num):
+        #     sheet.write(0,i,keys[i])
+        # for i in range(0,people_num):
+        #     for j in range(0,key_num):
+        #         sheet.write(i+1,j,str(content[keys[j]][i]))
         t=time_stamp()
-        save_xlsx(wb,prefix,t,dir=path_test_file)
+        filepath=save_xls(wb,prefix,t,dir=path_test_file)
+        return filepath
+
 
 
 
@@ -145,10 +148,10 @@ class Read_config:
         roles=self.company['role']
         r=roles[role]
         return r
-
-r=Read_config()
-
-c=r.get_bill_part_time()
+#
+# r=Read_config()
+#
+# c=r.get_bill_part_time()
 
 
 

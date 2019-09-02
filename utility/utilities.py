@@ -49,9 +49,10 @@ def time_stamp():
     s=time.strftime("%Y%m%d%H%M%S",t)
     return s
 
-def save_xlsx(wb,*args,dir=None):
+def save_xls(wb,*args,dir=None):
     extension=r'.xls'
     filename=''
+    path=''
     for i in range(len(args)):
         filename=filename+args[i]
     if filename:
@@ -59,11 +60,17 @@ def save_xlsx(wb,*args,dir=None):
         if dir:
             path=os.path.join(dir,filename)
             wb.save(path)
-
-    else:
-        filename=None
-    return filename
-
+    return path
+def write_xls(sheet,content):
+    keys = content.keys()
+    keys = list(keys)
+    people_num = len(content['姓名'])
+    key_num = len(keys)
+    for i in range(0, key_num):
+        sheet.write(0, i, keys[i])
+    for i in range(0, people_num):
+        for j in range(0, key_num):
+            sheet.write(i + 1, j, str(content[keys[j]][i]))
 
 
 
