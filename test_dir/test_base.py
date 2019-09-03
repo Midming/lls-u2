@@ -6,11 +6,15 @@ from page.agency.agencyDashboard_page import AgencyDashboard
 from page.company.companyLogin_page import CompanyLogin
 from page.company.companyDashboard_page import CompanyDashboard
 from page.company.companyBillImport_page import CompangyBillImport
+from page.company.companySettlementDetails_page import CompangySettlementDetails
 
 
 from utility.utilities import ele_input,is_ele_exist
 import time
 from time import sleep
+
+
+pt_bill_number=None
 
 class Test_platform:
 
@@ -118,42 +122,37 @@ class Test_company():
             print('发现弹窗')
             ele_window.click()
             dashboard.ele_window_confirm().click()
-
-
         url_dashboard = rd.company_url('dashboard')
         time.sleep(3)
         assert_url = self.elements(browser).driver.current_url
-
-        print(url_dashboard, assert_url)
         assert url_dashboard == assert_url
-    def get_part_time_bill(self):
-        pass
-
 
     def test_part_time_bill(self,browser):
         rd = self.readconifg()
-
         dashboard=CompanyDashboard(browser)
         dashboard.ele_settlement_management().click()
-        sleep(1)
         dashboard.ele_bill_import().click()
-        sleep(1)
-        dashboard.ele_settlement_record().click()
-        sleep(1)
+        # dashboard.ele_settlement_record().click()
+
+
         page_billImport=CompangyBillImport(browser)
         page_billImport.ele_part_time().click()
-        sleep(1)
+        filepath=rd.get_bill_part_time()
+        ele_pt_import_bill_input=page_billImport.ele_pt_import_bill_input()
+        ele_pt_import_bill_input.send_keys(filepath)
+        ele_pt_import_success=page_billImport.ele_pt_import_success()
+        ele_pt_import_success.click()
+        msg=ele_pt_import_success.text
 
-        dashboard.ele_settlement_management().click()
-
-
-
-        # page_billImport.ele_full_time().click()
-        # sleep(1)
-        # ele_import_bill=page_billImport.ele_import_bill()
-        # filepath=rd.get_bill_part_time()
-        # ele_import_bill_input=page_billImport.ele_import_bill_input()
-        # ele_import_bill_input.send_keys(filepath)
+        page_settlementDeatails=CompangySettlementDetails(browser)
+        try:
+            ele_pt_bill_number = page_settlementDeatails.ele_pt_bill_number()
+        except Exception:
+            print('获取导入的非全日制账单编号失败')
+        else:
+            global pt_bill_number
+            pt_bill_number=ele_pt_bill_number.text
+        assert msg=='查看结算单'
 
 
 

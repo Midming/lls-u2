@@ -1,5 +1,24 @@
 full-time: ['id',"tab-first"]
-part-time: ['id',"tab-second"]
 
-import-bill: ['xpath',"//div/button/span"]
-import-bill-input: ['xpath',"//div/input"]
+
+
+
+
+
+part-time: ['id',"tab-second"]
+total-record: [xpath,'//div[2]/div/section[2]/div[2]/div[2]/div/span']
+
+pt_import-bill: ['xpath',"//div/button/span"]
+#import-bill-input: ['xpath',"//div/input"]
+pt-import-bill-input: [css,'div[data-pup="company_bill_part_upload"]>div>input']
+
+pt-import-success: [xpath,"//div[@id='pane-second']/div/div/div/div[3]/span/button[2]/span"]
+pt_import_fail: [xpath,"//div[@id='pane-second']/div/div[2]/div/div[3]/span/div/div/button/span"]
+
+
+
+
+
+
+
+

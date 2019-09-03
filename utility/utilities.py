@@ -1,5 +1,11 @@
-import time,os
+import time,os,yaml
 from selenium.common.exceptions import NoSuchElementException
+
+
+def read_yaml(path):
+    with open(path,encoding='utf-8') as f:
+        content=yaml.load(f,Loader=yaml.FullLoader)
+        return content
 def url_join(*args):
     seq='/'
     url=''
@@ -71,6 +77,16 @@ def write_xls(sheet,content):
     for i in range(0, people_num):
         for j in range(0, key_num):
             sheet.write(i + 1, j, str(content[keys[j]][i]))
-
+def transfer_location(dict_content):
+    ['css selector', '[data-pup="ComSettlement"]']
+    for k,v in dict_content.items():
+        t=type(v)
+        l=len(v)
+        if t==str:
+            dict_content[k]=['css selector','[data-pup={}]'.format(v)]
+        if t==list and l==2:
+            if v[0]=='css':
+                v[0]='css selector'
+    return dict_content
 
 

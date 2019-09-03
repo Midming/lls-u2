@@ -3,4 +3,14 @@ window:
   confirm: ['xpath','//button[2]/span']
   cabcel: []
 
-
+home-page: CliIndexIndex
+client-management: CliClient
+demander: CliClientCompany
+service-provider: CliClientLabor
+bill-confirm: CliSettlementSettlement
+financial-management: CliFinance
+settlement-record: CliFinanceSettlement
+transaction-data: CliFinanceTransaction
+withdraw-record: CliFinanceWithdraw
+system-mangement: CliSystem
+user-management: CliSystemUser

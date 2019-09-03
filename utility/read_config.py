@@ -2,7 +2,8 @@ import yaml,os
 import xlwt
 from utility.basePage import BasePage
 from urllib.parse import urljoin
-from utility.utilities import url_join,read_interface,save_xls,time_stamp,write_xls
+from utility.utilities import read_yaml
+from utility.utilities import url_join,read_interface,save_xls,time_stamp,write_xls,transfer_location
 from config.path import current_env_path,url_path,read_yaml,location_dir,dir_path
 path_location_agency=os.path.join(location_dir,'agency')
 path_location_platform=os.path.join(location_dir,'platform')
@@ -31,10 +32,7 @@ path_test_file_temp= os.path.join(path_test_data, 'temp.yaml')
 # current_env=read_yaml(environment_path)['env']
 # current_env=current_env+r'.yaml'
 # current_env_path=os.path.join(env_path,current_env)
-def read_yaml(path):
-    with open(path,encoding='utf-8') as f:
-        content=yaml.load(f,Loader=yaml.FullLoader)
-        return content
+
 
 class Read_config:
     def __init__(self):
@@ -83,32 +81,49 @@ class Read_config:
     def read_location_platform_login(self):
         self.path = os.path.join(path_location_platform, 'login.yaml')
         content = read_yaml(self.path)
+        content=transfer_location(content)
+
         return content
 
 
     def read_location_company_login(self):
         self.path=os.path.join(path_location_company,'login.yaml')
         content = read_yaml(self.path)
+        content=transfer_location(content)
         return content
 
     def read_location_company_dashboard(self):
         self.path=os.path.join(path_location_company,'dashboard.yaml')
         content=read_yaml(self.path)
+        content=transfer_location(content)
         return content
 
     def read_location_company_billImport(self):
         self.path=os.path.join(path_location_company,'bill-import.yaml')
         content = read_yaml(self.path)
+        content=transfer_location(content)
+
+        return content
+
+    def read_location_company_settlementDetails(self):
+        self.path = os.path.join(path_location_company, 'settlement-details.yaml')
+        content = read_yaml(self.path)
+        content = transfer_location(content)
+
         return content
 
     def read_location_agency_dashboard(self):
         self.path=os.path.join(path_location_agency,'dashboard.yaml')
         content=read_yaml(self.path)
+        content=transfer_location(content)
+
         return content
 
     def read_location_agency_login(self):
         self.path = os.path.join(path_location_agency, 'login.yaml')
         content = read_yaml(self.path)
+        content=transfer_location(content)
+
         return content
 
 
@@ -150,8 +165,10 @@ class Read_config:
         return r
 #
 # r=Read_config()
-#
-# c=r.get_bill_part_time()
+# #
+# c=r.read_location_company_dashboard()
+# d=transfer_location(c)
+# print(d)
 
 
 

@@ -1,0 +1,1 @@
+pt-bill-number: [xpath,"(.//*[normalize-space(text()) and normalize-space(.)='编号'])[1]/following::td[1]"]

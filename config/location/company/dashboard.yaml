@@ -1,16 +1,33 @@
+#登陆的弹窗
 window:
   self: ['xpath',"//div[@id='app']/div/div/div/div[3]/span/button/span"]
   confirm: ['xpath','//div[3]/span/button[2]/span']
   cabcel: []
 
+home-page: ComIndexIndex
+service-provider: ComLaborLabor
+
 #settlement-management: ['xpath',"(.//*[normalize-space(text()) and normalize-space(.)='结算记录'])[1]/preceding::span[2]"]
-settlement-management: ['css selector','[data-pup="ComSettlement"]']
+#settlement-management: ['css selector','[data-pup="ComSettlement"]']
+settlement-management: ComSettlement
 
 #bill-import: ['xpath',"//div[@id='app']/div/section[2]/aside/div/ul/div/section[4]/li/ul/div/a/li"]
-bill-import: ['css selector','[data-pup="ComSettlementImport"]']
-
+#bill-import: ['css selector','[data-pup="ComSettlementImport"]']
+bill-import: ComSettlementImport
 
 #settlement-record: ['xpath',"(.//*[normalize-space(text()) and normalize-space(.)='结算管理'])[1]/following::li[2]"]
-settlement-record: ['css selector','[data-pup="ComSettlementRecord"]']
+#settlement-record: ['css selector','[data-pup="ComSettlementRecord"]']
+settlement-record: ComSettlementRecord
+transaction-data: ComTransactionTransaction
+system-management: ComSystem
+
+
+
+
+
+company: company_dashboard_info
+balance: company_dashboard_balance
+
+
 
 

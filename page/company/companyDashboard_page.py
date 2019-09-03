@@ -21,9 +21,9 @@ class CompanyDashboard():
 
     def ele_settlement_management(self):
         by=self.content['settlement-management']
-        print("==========================",by)
         ele = self.driver.find_element(by[0], by[1])
         return ele
+
     def ele_bill_import(self):
         by=self.content['bill-import']
         ele = self.driver.find_element(by[0], by[1])
@@ -34,5 +34,3 @@ class CompanyDashboard():
         return ele
 
 
-c=CompanyDashboard('b')
-print(c.content)
