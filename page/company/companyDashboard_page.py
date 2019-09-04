@@ -18,6 +18,10 @@ class CompanyDashboard():
         by = self.content['window']['confirm']
         ele=self.driver.find_element(by[0],by[1])
         return ele
+    def ele_home_page(self):
+        by=self.content['home_page']
+        ele = self.driver.find_element(by[0], by[1])
+        return ele
 
     def ele_settlement_management(self):
         by=self.content['settlement-management']

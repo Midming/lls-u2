@@ -78,7 +78,6 @@ def write_xls(sheet,content):
         for j in range(0, key_num):
             sheet.write(i + 1, j, str(content[keys[j]][i]))
 def transfer_location(dict_content):
-    ['css selector', '[data-pup="ComSettlement"]']
     for k,v in dict_content.items():
         t=type(v)
         l=len(v)
@@ -88,5 +87,20 @@ def transfer_location(dict_content):
             if v[0]=='css':
                 v[0]='css selector'
     return dict_content
+
+def transfer_importBill_toList(dict_content):
+    test_num=len(dict_content['姓名'])
+    result=[]
+
+    keys=list(dict_content.keys())
+
+    for i in range(test_num):
+        one = {}
+        for j in range(len(keys)):
+            k=keys[j]
+            v=dict_content[k][i]
+            one[k]=v
+        result.append(one)
+    return result
 
 

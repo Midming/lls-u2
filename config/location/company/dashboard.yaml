@@ -4,7 +4,7 @@ window:
   confirm: ['xpath','//div[3]/span/button[2]/span']
   cabcel: []
 
-home-page: ComIndexIndex
+home_page: ComIndexIndex
 service-provider: ComLaborLabor
 
 #settlement-management: ['xpath',"(.//*[normalize-space(text()) and normalize-space(.)='结算记录'])[1]/preceding::span[2]"]

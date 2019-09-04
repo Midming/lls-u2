@@ -13,7 +13,11 @@ pt_import-bill: ['xpath',"//div/button/span"]
 pt-import-bill-input: [css,'div[data-pup="company_bill_part_upload"]>div>input']
 
 pt-import-success: [xpath,"//div[@id='pane-second']/div/div/div/div[3]/span/button[2]/span"]
-pt_import_fail: [xpath,"//div[@id='pane-second']/div/div[2]/div/div[3]/span/div/div/button/span"]
+#pt_import_fail: [xpath,"//div[@id='pane-second']/div/div[2]/div/div[3]/span/div/div/button/span"]
+pt_import_fail: [xpath,"//div[@data-pup='company_bull_part_error_renew']/div/button/span"]
+
+pt_import_fail_close: [css,'button[data-pup="company_bull_part_error_close"]>span']
+
 
 
 

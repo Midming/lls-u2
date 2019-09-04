@@ -27,3 +27,7 @@ class CompangyBillImport:
         by=self.content['pt_import_fail']
         ele = self.driver.find_element(by[0], by[1])
         return ele
+    def ele_pt_import_fail_close(self):
+        by = self.content['pt_import_fail_close']
+        ele = self.driver.find_element(by[0], by[1])
+        return ele

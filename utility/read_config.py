@@ -1,9 +1,9 @@
-import yaml,os
+import yaml,os,time
 import xlwt
 from utility.basePage import BasePage
 from urllib.parse import urljoin
 from utility.utilities import read_yaml
-from utility.utilities import url_join,read_interface,save_xls,time_stamp,write_xls,transfer_location
+from utility.utilities import url_join,read_interface,save_xls,time_stamp,write_xls,transfer_location,transfer_importBill_toList
 from config.path import current_env_path,url_path,read_yaml,location_dir,dir_path
 path_location_agency=os.path.join(location_dir,'agency')
 path_location_platform=os.path.join(location_dir,'platform')
@@ -49,11 +49,16 @@ class Read_config:
     def read_test_data():
         content=read_yaml(path_test_file_temp)
         return content
-    def get_bill_part_time(self):
-        content=self.test_data['part-time-bill']
+    def read_pt_import_bill(self):
+        content = self.test_data['part-time-bill']
+        content=transfer_importBill_toList(content)
+        return content
+
+    def get_bill_part_time(self,dict_content):
+        content=dict_content
         wb=xlwt.Workbook()
         sheet=wb.add_sheet('工作表1',cell_overwrite_ok=True)
-
+        expect = content.pop('expect')
         prefix=content.pop('prefix')
         write_xls(sheet,content)
 
@@ -67,8 +72,9 @@ class Read_config:
         #     for j in range(0,key_num):
         #         sheet.write(i+1,j,str(content[keys[j]][i]))
         t=time_stamp()
+        time.sleep(1)
         filepath=save_xls(wb,prefix,t,dir=path_test_file)
-        return filepath
+        return filepath,expect
 
 
 
@@ -166,10 +172,11 @@ class Read_config:
 #
 # r=Read_config()
 # #
-# c=r.read_location_company_dashboard()
-# d=transfer_location(c)
+# d=r.read_pt_import_bill()
 # print(d)
-
+# for i in d:
+#     f=r.get_bill_part_time(i)
+#     print(f)
 
 
 
