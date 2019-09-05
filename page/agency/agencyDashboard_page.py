@@ -18,3 +18,51 @@ class AgencyDashboard():
         by = self.content['window']['confirm']
         ele=self.driver.find_element(by[0],by[1])
         return ele
+
+
+    def ele_home_page(self):
+        by=self.content['home_page']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+
+
+    def ele_client_management(self):
+        by=self.content['client_management']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_demander(self):
+        by=self.content['demander']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_service_provider(self):
+        by=self.content['service_provider']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_bill_confirm(self):
+        by=self.content['bill_confirm']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_financial_management(self):
+        by=self.content['financial_management']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_settlement_record(self):
+        by=self.content['settlement_record']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_transaction_data(self):
+        by=self.content['transaction_data']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_withdraw_record(self):
+        by=self.content['withdraw_record']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_system_mangement(self):
+        by=self.content['system_mangement']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele
+    def ele_user_management(self):
+        by=self.content['user_management']
+        ele=self.driver.find_element(by[0],by[1])
+        return ele

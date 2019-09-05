@@ -2,12 +2,14 @@ from utility.read_config import Read_config
 from page.platform.platformLogin_page import PlatformLogin
 from page.agency.agencyLogin_page import AngencyLogin
 from page.agency.agencyDashboard_page import AgencyDashboard
+from page.agency.agencySettlementRecord_page import AgencySettlementRecord
 
 from page.company.companyLogin_page import CompanyLogin
 from page.company.companyDashboard_page import CompanyDashboard
 from page.company.companyBillImport_page import CompangyBillImport
 from page.company.companySettlementDetails_page import CompangySettlementDetails
 
+from selenium.webdriver import ActionChains
 
 from utility.utilities import ele_input,is_ele_exist
 import time,pytest
@@ -15,6 +17,13 @@ from time import sleep
 
 
 pt_bill_number=None
+Data_import_pt_bill=Read_config().read_pt_import_bill()
+@pytest.fixture(scope='module',params=Data_import_pt_bill)
+def data_import_pt_bill(request):
+    return request.param
+
+
+
 
 class Test_platform:
 
@@ -53,8 +62,14 @@ class Test_platform:
         assert url_dashboard==assert_url
 
 class Test_agecy():
-    def elements(self,browser):
+    def page_login(self,browser):
         eles=AngencyLogin(browser)
+        return eles
+    def page_dashboard(self,browser):
+        eles=AgencyDashboard(browser)
+        return eles
+    def page_settlementRecord(self,browser):
+        eles=AgencySettlementRecord(browser)
         return eles
 
     def test_login(self,browser):
@@ -62,19 +77,19 @@ class Test_agecy():
 
         role = rd.angency_role('tester01')
         url=rd.angency_url('login')
-        self.elements(browser).driver.get(url)
+        self.page_login(browser).driver.get(url)
         username = role[0]
         verification = role[1]
-        ele_username = self.elements(browser).ele_username()
+        ele_username = self.page_login(browser).ele_username()
         ele_input(ele_username, username)
 
-        ele_verification = self.elements(browser).ele_verification()
+        ele_verification = self.page_login(browser).ele_verification()
         ele_input(ele_verification, verification)
 
-        ele_login = self.elements(browser).ele_login()
+        ele_login = self.page_login(browser).ele_login()
         ele_login.click()
 
-        dashboard=AgencyDashboard(browser)
+        dashboard=self.page_dashboard(browser)
         window_by=dashboard.window_by()
         ele_window=is_ele_exist(browser,window_by)
         if ele_window:
@@ -85,15 +100,45 @@ class Test_agecy():
 
         url_dashboard = rd.angency_url('dashboard')
         time.sleep(3)
-        assert_url = self.elements(browser).driver.current_url
+        assert_url = self.page_login(browser).driver.current_url
 
         print(url_dashboard, assert_url)
         assert url_dashboard == assert_url
 
-Data_import_pt_bill=Read_config().read_pt_import_bill()
-@pytest.fixture(scope='module',params=Data_import_pt_bill)
-def data_import_pt_bill(request):
-    return request.param
+    def test_settlement_record(self,browser):
+        ds=self.page_dashboard(browser)
+        ds.ele_home_page().click()
+        browser.refresh()
+        ds.ele_home_page().click()
+
+        ds.ele_financial_management().click()
+        ds.ele_settlement_record().click()
+        time.sleep(5)
+        sr=self.page_settlementRecord(browser)
+        table=sr.ele_table()
+        rows=table.find_elements('tag name','tr')
+        l_rows=len(rows)
+        print('表格总行数{}'.format(l_rows))
+        l_cols=len(rows[0].find_elements('tag name','td'))
+
+        print('表格总列数{}'.format(l_cols))
+
+
+        for i in range(l_rows):
+            bill_num=rows[i].find_elements('tag name','td')[0]
+            if bill_num.text=='201909030168':
+                h=rows[i].find_elements('tag name','td')[l_cols-1]
+                # browser.execute_script("arguments[0].click();", h)
+                ActionChains(browser).move_to_element(h).perform()
+                break
+
+
+
+
+
+
+
+
 
 class Test_company():
     @staticmethod
@@ -133,6 +178,7 @@ class Test_company():
         assert url_dashboard == assert_url
 
 
+    @pytest.mark.skip(reason='跳过')
     def test_part_time_bill(self,browser,data_import_pt_bill):
         rd = self.readconifg()
         dashboard=CompanyDashboard(browser)

@@ -102,5 +102,7 @@ def transfer_importBill_toList(dict_content):
             one[k]=v
         result.append(one)
     return result
+def ele(browser,by):
+    return browser.find_element(by[0],by[1])
 
 

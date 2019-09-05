@@ -129,7 +129,11 @@ class Read_config:
         self.path = os.path.join(path_location_agency, 'login.yaml')
         content = read_yaml(self.path)
         content=transfer_location(content)
-
+        return content
+    def read_location_agency_settlementRecord(self):
+        path= os.path.join(path_location_agency, 'settlement_record.yaml')
+        content = read_yaml(path)
+        content = transfer_location(content)
         return content
 
 
