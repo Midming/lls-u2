@@ -10,6 +10,10 @@ from page.company.companyBillImport_page import CompangyBillImport
 from page.company.companySettlementDetails_page import CompangySettlementDetails
 
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+from pykeyboard import PyKeyboard
+from pymouse import PyMouse
 
 from utility.utilities import ele_input,is_ele_exist
 import time,pytest
@@ -78,6 +82,7 @@ class Test_agecy():
         role = rd.angency_role('tester01')
         url=rd.angency_url('login')
         self.page_login(browser).driver.get(url)
+        browser.maximize_window()
         username = role[0]
         verification = role[1]
         ele_username = self.page_login(browser).ele_username()
@@ -129,7 +134,20 @@ class Test_agecy():
             if bill_num.text=='201909030168':
                 h=rows[i].find_elements('tag name','td')[l_cols-1]
                 # browser.execute_script("arguments[0].click();", h)
-                ActionChains(browser).move_to_element(h).perform()
+                action=ActionChains(browser)
+                action.move_to_element(h).perform()
+                time.sleep(5)
+
+                # browser.find_element('xpath','/html/body/ul[2]/li').click()
+                # action.move_to_element_with_offset(h,30,30).send_keys(Keys.ENTER).perform()
+                time.sleep(2)
+
+
+                # ky=PyKeyboard()
+                # print(dir(ky))
+                # ky.tab_key(ky.up_key)
+                # # ky.release_key(ky.up_key)
+                # ky.tab_key(ky.enter_key)
                 break
 
 
